@@ -15,7 +15,8 @@ jobs:
 
       - name: Extraer proyecto desde ZIP
         run: |
-          mkdir -p /tmp/reto
+          mkdir -p /tmp/reto 
+          echo "android.useAndroidX=true" > /tmp/reto/gradle.properties
           unzip -o Reto_Matematico_V5_APK.zip -d /tmp/reto
           cp -a /tmp/reto/settings.gradle .
           cp -a /tmp/reto/build.gradle .
