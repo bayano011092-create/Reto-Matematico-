@@ -22,6 +22,16 @@ jobs:
           cp -a /tmp/reto/app .
           cp -a /tmp/reto/README.md . 2>/dev/null || true
           echo "android.useAndroidX=true" > gradle.properties
+          echo "android.enableJetifier=true" >> gradle.properties
+          cat >> build.gradle <<'EOF'
+          configurations.all {
+                resolutionStrategy {
+                   force 'org.jetbrains.kotlin:kotlin-stdlib:1.8.22'
+                   force 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.8.22'
+                   force 'org.jetbrains.kotlin:kotlin-stdlib-jdk8:1.8.22'
+                  }
+              }
+          EOF
       - name: Configurar Java 17
         uses: actions/setup-java@v5
         with:
