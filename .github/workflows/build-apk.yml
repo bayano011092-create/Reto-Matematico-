@@ -23,6 +23,15 @@ jobs:
           cp -a /tmp/reto/README.md . 2>/dev/null || true
           echo "android.useAndroidX=true" > gradle.properties
           echo "android.enableJetifier=true" >> gradle.properties
+          cat >> build.gradle <<'EOF'
+
+          subprojects {
+          configurations.all {
+          exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jdk7'
+          exclude group: 'org.jetbrains.kotlin', module: 'kotlin-stdlib-jdk8'
+           }
+          }
+          EOF
           sed -i '/kotlin-stdlib-jdk7/d; /kotlin-stdlib-jdk8/d' app/build.gradle
       - name: Configurar Java 17
         uses: actions/setup-java@v5
